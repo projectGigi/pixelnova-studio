@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PixelNova Studio</title>
   <link rel="icon" href="icono_agencia.png" type="image/png" sizes="32x32" />
+  <!-- Importar fuente pixelada -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     body {
       background-color: black;
@@ -13,6 +15,11 @@
       padding: 20px;
       margin: auto;
       max-width: 1000px;
+
+      /* Mejorar efecto pixelado */
+      text-rendering: optimizeSpeed;
+      -webkit-font-smoothing: none;
+      -moz-osx-font-smoothing: grayscale;
     }
     h1, h2, h3 {
       color: #ff4444;
