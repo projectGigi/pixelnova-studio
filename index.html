@@ -21,7 +21,39 @@
       -webkit-font-smoothing: none;
       -moz-osx-font-smoothing: grayscale;
     }
-    h1, h2, h3 {
+    h1 {
+      position: relative;
+      overflow: hidden;
+      color: #ff4444;
+      text-shadow: 1px 1px #000;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+    h1::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: skewX(-25deg);
+      animation: shine 3s infinite;
+    }
+    @keyframes shine {
+      0% {
+        left: -75%;
+      }
+      100% {
+        left: 125%;
+      }
+    }
+    h2, h3 {
       color: #ff4444;
       text-shadow: 1px 1px #000;
     }
@@ -60,78 +92,78 @@
   </style>
 </head>
 <body>
-  <h1 style="text-align:center;">PixelNova Studio</h1>
+  <h1>PixelNova Studio</h1>
 
   <details class="section" open>
     <summary>✨ Marca Corporativa</summary>
     <p><span class="highlight">Nombre:</span> PixelNova Studio</p>
-    <p><span class="highlight">Eslogan:</span> "Diseño que impulsa, soluciones que transforman"</p>
-    <p><span class="highlight">Colores:</span> Azul oscuro, celeste, blanco</p>
-    <p><span class="highlight">Tipografía:</span> Montserrat y Roboto</p>
+    <p><span class="highlight">Eslogan:</span> "Dando vida a tus ideas en 3D"</p>
+    <p><span class="highlight">Colores:</span> Azul oscuro, turquesa, blanco</p>
+    <p><span class="highlight">Tipografía:</span> Press Start 2P y Montserrat</p>
   </details>
 
   <details class="section">
     <summary>🌍 Visión</summary>
-    <p>Ser una agencia reconocida en Latinoamérica por ofrecer soluciones digitales innovadoras, accesibles y personalizadas para emprendedores, pequeñas empresas y proyectos creativos.</p>
+    <p>Ser un estudio líder en Latinoamérica en animación y modelado 3D, reconocido por su creatividad, innovación tecnológica y calidad artística, impulsando proyectos que trascienden la pantalla.</p>
   </details>
 
   <details class="section">
     <summary>🎯 Misión</summary>
-    <p>Brindar servicios de diseño, desarrollo web, branding y contenido digital con un enfoque humano, eficiente y creativo, utilizando plataformas tecnológicas de última generación y trabajo colaborativo en línea.</p>
+    <p>Ofrecer servicios profesionales de animación 3D, modelado, rigging y efectos visuales con un enfoque creativo y técnico, apoyando a empresas, videojuegos, cine y proyectos digitales para alcanzar su máxima expresión visual.</p>
   </details>
 
   <details class="section">
     <summary>🧑‍💼 Organigrama Empresarial</summary>
     <ul>
       <li>Director General</li>
-      <li>Área de Diseño Gráfico</li>
-      <li>Área Web</li>
-      <li>Área de Comunicación y RRSS</li>
-      <li>Área de Soporte Técnico</li>
+      <li>Equipo de Modelado 3D</li>
+      <li>Equipo de Animación</li>
+      <li>Equipo de Texturizado y Materiales</li>
+      <li>Equipo de Postproducción y Efectos</li>
     </ul>
   </details>
 
   <details class="section">
     <summary>🔧 Funciones</summary>
     <ul>
-      <li><span class="highlight">Dirección General:</span> Gestión del proyecto, coordinación, atención al cliente.</li>
-      <li><span class="highlight">Diseño Gráfico:</span> Identidad visual, material promocional, diseño UI.</li>
-      <li><span class="highlight">Desarrollo Web:</span> Maquetación, mantenimiento, SEO.</li>
-      <li><span class="highlight">Comunicación y RRSS:</span> Redes sociales, contenido, métricas.</li>
-      <li><span class="highlight">Soporte Técnico:</span> Seguridad, protección de datos, contraseñas.</li>
+      <li><span class="highlight">Dirección General:</span> Coordinación de proyectos, supervisión creativa y contacto con clientes.</li>
+      <li><span class="highlight">Modelado 3D:</span> Creación de modelos digitales detallados y optimizados.</li>
+      <li><span class="highlight">Animación:</span> Desarrollo de movimientos y rigging para personajes y objetos.</li>
+      <li><span class="highlight">Texturizado:</span> Aplicación de materiales, texturas y luces realistas o estilizadas.</li>
+      <li><span class="highlight">Postproducción:</span> Composición, efectos visuales y render final.</li>
     </ul>
   </details>
 
   <details class="section">
     <summary>🛠️ Plataformas de Productividad</summary>
     <ul>
-      <li>Trello - Gestión de tareas</li>
+      <li>Blender / Maya - Modelado y Animación</li>
+      <li>Substance Painter - Texturizado</li>
+      <li>Adobe After Effects - Postproducción</li>
       <li>Notion - Organización y notas</li>
-      <li>Google Drive - Archivos y documentos</li>
-      <li>Slack - Comunicación</li>
-      <li>Zoom / Meet - Reuniones</li>
+      <li>Trello - Gestión de proyectos</li>
     </ul>
   </details>
 
   <details class="section">
     <summary>🛡️ Plataformas de Seguridad</summary>
     <ul>
-      <li>1Password / Bitwarden - Contraseñas</li>
-      <li>ProtonMail - Email seguro</li>
-      <li>Cloudflare - Seguridad web</li>
-      <li>Google Authenticator - 2FA</li>
-      <li>VirusTotal - Escaneo</li>
+      <li>1Password / Bitwarden - Gestión de contraseñas</li>
+      <li>ProtonMail - Correo seguro</li>
+      <li>Google Authenticator - Autenticación 2FA</li>
+      <li>VPN corporativa - Seguridad de red</li>
+      <li>Backups automáticos en la nube</li>
     </ul>
   </details>
 
   <details class="section">
     <summary>📣 Plataformas para Publicación</summary>
     <ul>
-      <li>Instagram / TikTok - Portafolio visual</li>
-      <li>Behance / Dribbble - Portafolio profesional</li>
-      <li>WordPress - Página web</li>
-      <li>YouTube - Videos promocionales</li>
-      <li>LinkedIn - Presencia profesional</li>
+      <li>ArtStation / Behance - Portafolio profesional</li>
+      <li>YouTube / Vimeo - Videos y reels</li>
+      <li>Instagram - Visual y comunidad</li>
+      <li>LinkedIn - Contacto profesional</li>
+      <li>Discord - Comunicación y comunidad</li>
     </ul>
   </details>
 
