@@ -15,8 +15,6 @@
       padding: 20px;
       margin: auto;
       max-width: 1000px;
-
-      /* Mejorar efecto pixelado */
       text-rendering: optimizeSpeed;
       -webkit-font-smoothing: none;
       -moz-osx-font-smoothing: grayscale;
@@ -92,6 +90,22 @@
     .gif-container {
       text-align: center;
       margin: 15px 0;
+    }
+
+    /* MODIFICACIÓN AGREGADA */
+    .watermark {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 10px;
+      color: #ffcc00;
+      opacity: 0.7;
+      animation: blink 2s infinite;
+      z-index: 999;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
     }
   </style>
 </head>
@@ -180,5 +194,8 @@
     Estudiante de Animación Digital y Videojuegos en INACAP<br>
     Proyecto final para la asignatura "TIC Aplicadas al Diseño"
   </p>
+
+  <!-- Marca de modificación -->
+  <div class="watermark">v1.1 ✨ modificado con amor</div>
 </body>
 </html>
