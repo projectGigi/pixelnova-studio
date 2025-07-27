@@ -3,199 +3,533 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PixelNova Studio</title>
-  <link rel="icon" href="icono_agencia.png" type="image/png" sizes="32x32" />
-  <!-- Importar fuente pixelada -->
+  <title>Portafolio de Gigi</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="icon" href="icono_agencia.png" type="image/png" sizes="32x32" />
+  
+  <!-- SEO Meta -->
+  <meta name="description" content="Portafolio digital de Gigi, artista 3D y diseñadora de entornos. Proyectos, contacto y más." />
+  <meta name="keywords" content="3D, Blender, Animación Digital, Videojuegos, Diseño, Gigi" />
+  <meta name="author" content="Gigi" />
+  
   <style>
+    /* Variables para colores en light/dark */
+    :root {
+      --color-bg-dark: black;
+      --color-bg-light: #fefefe;
+      --color-text-dark: white;
+      --color-text-light: #222;
+      --color-accent: #ffcc00;
+      --color-accent-hover: #ffdd33;
+      --color-highlight: #ff4444;
+      --font-family: 'Press Start 2P', cursive;
+    }
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background-color: black;
-      color: white;
-      font-family: 'Press Start 2P', cursive;
+      font-family: var(--font-family);
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-dark);
+      background-image: url('blue.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
       padding: 20px;
-      margin: auto;
-      max-width: 1000px;
+      margin: 0;
       text-rendering: optimizeSpeed;
       -webkit-font-smoothing: none;
       -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.3s ease, color 0.3s ease, background-image 0.5s ease;
+      position: relative;
+      min-height: 100vh;
     }
+
+    body.light {
+      background-color: var(--color-bg-light);
+      color: var(--color-text-light);
+      background-image: url('red.png');
+    }
+
+    /* Capa oscura (solo en dark mode) */
+    body:not(.light)::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+      transition: background-color 0.3s ease;
+    }
+
+    body.light::before {
+      content: none; /* quitar capa oscura en modo claro */
+    }
+
     h1 {
       position: relative;
       overflow: hidden;
-      color: #ff4444;
+      color: var(--color-highlight);
       text-shadow: 1px 1px #000;
       font-size: 2.5rem;
       text-align: center;
+      margin-bottom: 40px;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
     }
+
+    body.light h1 {
+      color: var(--color-accent);
+      text-shadow: 1px 1px #ccc;
+    }
+
     h1::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: -75%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(
-        120deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.5) 50%,
-        rgba(255, 255, 255, 0) 100%
-      );
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
       transform: skewX(-25deg);
       animation: shine 3s infinite;
     }
+
     @keyframes shine {
-      0% {
-        left: -75%;
-      }
-      100% {
-        left: 125%;
-      }
+      0% { left: -75%; }
+      100% { left: 125%; }
     }
-    h2, h3 {
-      color: #ff4444;
-      text-shadow: 1px 1px #000;
+
+    .main-container {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding-bottom: 50px; /* espacio para footer */
     }
+
     .section {
-      margin-bottom: 20px;
-      border: 2px solid #ff4444;
-      border-radius: 10px;
-      padding: 10px;
-      background-color: #111;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
     }
+
+    body.light .section {
+      background: rgba(255 255 255 / 0.8);
+      border-color: rgba(0 0 0 / 0.1);
+      box-shadow: 0 8px 32px rgba(0 0 0 / 0.1);
+      color: var(--color-text-light);
+    }
+
+    .section:hover {
+      background: rgba(17, 17, 17, 0.6);
+      border-color: var(--color-accent);
+    }
+
+    body.light .section:hover {
+      background: rgba(255 255 255 / 0.95);
+      border-color: var(--color-accent);
+    }
+
     .section summary {
       cursor: pointer;
       font-size: 16px;
-      color: #ffcc00;
-      outline: none;
+      color: var(--color-accent);
+      text-shadow: 1px 1px #000;
+      margin-bottom: 10px;
+      user-select: none;
+      transition: color 0.3s ease;
     }
+
+    body.light .section summary {
+      color: var(--color-highlight);
+      text-shadow: none;
+    }
+
     .section p, .section ul {
       font-size: 14px;
       line-height: 1.6em;
+      color: inherit;
     }
+
     ul {
       padding-left: 20px;
     }
+
     li {
       margin-bottom: 8px;
     }
+
     .highlight {
-      color: #ffcc00;
+      color: var(--color-accent);
+      font-weight: bold;
+      transition: color 0.3s ease;
     }
+
+    body.light .highlight {
+      color: var(--color-highlight);
+    }
+
     .autor {
       text-align: center;
       font-size: 12px;
       color: #999;
       margin-top: 30px;
     }
-    .gif-container {
-      text-align: center;
-      margin: 15px 0;
+
+    body.light .autor {
+      color: #555;
     }
 
-    /* MODIFICACIÓN AGREGADA */
     .watermark {
       position: fixed;
       bottom: 10px;
       right: 10px;
       font-size: 10px;
-      color: #ffcc00;
+      color: var(--color-accent);
       opacity: 0.7;
       animation: blink 2s infinite;
       z-index: 999;
+      user-select: none;
     }
+
     @keyframes blink {
       0%, 100% { opacity: 0.7; }
       50% { opacity: 1; }
     }
+
+    img.project {
+      width: 100%;
+      max-width: 900px;
+      border: 2px solid var(--color-highlight);
+      border-radius: 10px;
+      margin-top: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      object-fit: cover;
+      height: 250px;
+    }
+
+    img.project:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px var(--color-accent);
+    }
+
+    /* Botones */
+
+    #translateBtn, #toggleThemeBtn {
+      display: inline-block;
+      margin: 0 10px 30px 10px;
+      background-color: var(--color-accent);
+      color: black;
+      font-family: var(--font-family);
+      font-size: 14px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--color-accent);
+      transition: background-color 0.3s ease;
+      user-select: none;
+      min-width: 140px;
+      text-align: center;
+    }
+
+    #translateBtn:hover, #toggleThemeBtn:hover {
+      background-color: var(--color-accent-hover);
+    }
+
+    /* Redes sociales */
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 10px;
+    }
+
+    .socials a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    body.light .socials a {
+      color: var(--color-highlight);
+    }
+
+    .socials a:hover {
+      color: var(--color-accent-hover);
+    }
+
+    .socials svg {
+      width: 28px;
+      height: 28px;
+      vertical-align: middle;
+      fill: currentColor;
+      transition: fill 0.3s ease;
+    }
+
+    /* Slider de proyectos */
+
+    .slider {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      min-width: 100%;
+      user-select: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      filter: drop-shadow(0 0 3px var(--color-accent));
+      transition: transform 0.3s ease;
+    }
+
+    .slide img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Slider botones */
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--color-accent);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--color-accent);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .slider-btn:hover {
+      background: var(--color-accent-hover);
+    }
+
+    .slider-btn:focus {
+      outline: none;
+      box-shadow: 0 0 15px var(--color-accent-hover);
+    }
+
+    .slider-btn.prev {
+      left: 10px;
+    }
+
+    .slider-btn.next {
+      right: 10px;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      .slider .slide img {
+        height: 220px;
+      }
+      #translateBtn, #toggleThemeBtn {
+        font-size: 12px;
+        padding: 8px 15px;
+        min-width: 120px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>PixelNova Studio</h1>
 
-  <div class="gif-container">
-    <img src="sword.gif" alt="Espada retro en descampado" width="240" height="135" />
+  <h1 id="title">Portafolio de Gigi</h1>
+
+  <div style="text-align:center;">
+    <button id="translateBtn" aria-label="Change language">Translate to English</button>
+    <button id="toggleThemeBtn" aria-label="Toggle dark/light theme">Toggle Light/Dark Mode</button>
   </div>
 
-  <details class="section" open>
-    <summary>✨ Marca Corporativa</summary>
-    <p><span class="highlight">Nombre:</span> PixelNova Studio</p>
-    <p><span class="highlight">Eslogan:</span> "Dando vida a tus ideas en 3D"</p>
-    <p><span class="highlight">Colores:</span> Azul oscuro, turquesa, blanco</p>
-    <p><span class="highlight">Tipografía:</span> Press Start 2P y Montserrat</p>
-  </details>
+  <div class="main-container">
 
-  <details class="section">
-    <summary>🌍 Visión</summary>
-    <p>Ser un estudio líder en Latinoamérica en animación y modelado 3D, reconocido por su creatividad, innovación tecnológica y calidad artística, impulsando proyectos que trascienden la pantalla.</p>
-  </details>
+    <details class="section" open>
+      <summary id="whoami-summary" tabindex="0">🧙 Quién soy</summary>
+      <p id="whoami-p1">¡Hola! Me dicen <span class="highlight">Gigi</span>. Tengo 21 años y soy estudiante de Animación Digital y Desarrollo de Videojuegos en INACAP, Chile.</p>
+      <p id="whoami-p2">Mi pasión es el <span class="highlight">diseño de entornos 3D</span>, especialmente aquellos que transmiten atmósferas, emociones e historias. Me inspiro en los <span class="highlight">videojuegos</span> y el <span class="highlight">anime</span> para crear mundos únicos.</p>
+      <p id="whoami-p3">También disfruto de la programación. Con mis conocimientos básicos, he creado esta página desde cero, además de otros proyectos más pequeños. Mi meta es profesionalizar mi arte y vivir de lo que amo crear.</p>
+    </details>
 
-  <details class="section">
-    <summary>🎯 Misión</summary>
-    <p>Ofrecer servicios profesionales de animación 3D, modelado, rigging y efectos visuales con un enfoque creativo y técnico, apoyando a empresas, videojuegos, cine y proyectos digitales para alcanzar su máxima expresión visual.</p>
-  </details>
+    <details class="section">
+      <summary id="projects-summary" tabindex="0">🗂️ Proyectos 3D</summary>
+      <p id="projects-p">Aquí puedes ver una muestra de mis trabajos más recientes.</p>
 
-  <details class="section">
-    <summary>🧑‍💼 Organigrama Empresarial</summary>
-    <ul>
-      <li>Director General</li>
-      <li>Equipo de Modelado 3D</li>
-      <li>Equipo de Animación</li>
-      <li>Equipo de Texturizado y Materiales</li>
-      <li>Equipo de Postproducción y Efectos</li>
-    </ul>
-  </details>
+      <div class="slider" aria-label="Galería de proyectos">
+        <button class="slider-btn prev" aria-label="Proyecto anterior">&#9664;</button>
+        <div class="slider-track" id="sliderTrack">
+          <div class="slide">
+            <img src="projects/fondo1.png" alt="Proyecto Entorno 3D" loading="lazy" />
+          </div>
+          <div class="slide">
+            <img src="projects/fondo2.png" alt="Proyecto Entorno 3D 2" loading="lazy" />
+          </div>
+          <div class="slide">
+            <img src="projects/fondo3.png" alt="Proyecto Entorno 3D 3" loading="lazy" />
+          </div>
+        </div>
+        <button class="slider-btn next" aria-label="Siguiente proyecto">&#9654;</button>
+      </div>
+    </details>
 
-  <details class="section">
-    <summary>🔧 Funciones</summary>
-    <ul>
-      <li><span class="highlight">Dirección General:</span> Coordinación de proyectos, supervisión creativa y contacto con clientes.</li>
-      <li><span class="highlight">Modelado 3D:</span> Creación de modelos digitales detallados y optimizados.</li>
-      <li><span class="highlight">Animación:</span> Desarrollo de movimientos y rigging para personajes y objetos.</li>
-      <li><span class="highlight">Texturizado:</span> Aplicación de materiales, texturas y luces realistas o estilizadas.</li>
-      <li><span class="highlight">Postproducción:</span> Composición, efectos visuales y render final.</li>
-    </ul>
-  </details>
+    <details class="section">
+      <summary id="tools-summary" tabindex="0">🛠️ Herramientas que uso</summary>
+      <ul id="tools-list">
+        <li>Blender – Modelado, animación y renderizado</li>
+        <li>Substance Painter – Texturizado</li>
+        <li>Photoshop / Krita – Pintura digital</li>
+        <li>Visual Studio Code – Programación y scripting</li>
+        <li>GitHub – Control de versiones</li>
+      </ul>
+    </details>
 
-  <details class="section">
-    <summary>🛠️ Plataformas de Productividad</summary>
-    <ul>
-      <li>Blender / Maya - Modelado y Animación</li>
-      <li>Substance Painter - Texturizado</li>
-      <li>Adobe After Effects - Postproducción</li>
-      <li>Notion - Organización y notas</li>
-      <li>Trello - Gestión de proyectos</li>
-    </ul>
-  </details>
+    <details class="section">
+      <summary id="contact-summary" tabindex="0">📡 Contacto</summary>
+      <p id="contact-p">Puedes encontrarme o escribirme en:</p>
+      <ul class="socials" id="contact-list">
+        <li>
+          <a href="mailto:projectgigi.linux@proton.me" aria-label="Enviar email a Gigi" target="_blank" rel="noopener noreferrer">
+            <!-- Icono email SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" >
+              <path d="M2 4h20v16H2z" fill="none"/>
+              <path d="M22 6v12H2V6h20m0-2H2a2 2 0 00-2 2v12a2 2 0 002 2h20a2 2 0 002-2V6a2 2 0 00-2-2zm-2 4l-6 5-6-5V8l6 5 6-5v2z"/>
+            </svg>
+            Email
+          </a>
+        </li>
+        <li>
+          <a href="https://twitter.com/gigiiproject" target="_blank" rel="noopener noreferrer" aria-label="Perfil Twitter de Gigi">
+            <!-- Icono Twitter SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M23 3a10.9 10.9 0 01-3.14.86 4.48 4.48 0 001.97-2.48 10.8 10.8 0 01-3.4 1.3 4.52 4.52 0 00-7.7 4.13A12.84 12.84 0 013 4.15a4.48 4.48 0 001.4 6 4.48 4.48 0 01-2.05-.57v.06a4.52 4.52 0 003.6 4.43 4.52 4.52 0 01-2.04.08 4.52 4.52 0 004.22 3.13 9.06 9.06 0 01-5.6 1.92 9.36 9.36 0 01-1.07-.06 12.77 12.77 0 006.92 2.02c8.3 0 12.85-6.88 12.85-12.85 0-.2 0-.39-.01-.58A9.18 9.18 0 0023 3z"/>
+            </svg>
+            Twitter
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/projectGigi" target="_blank" rel="noopener noreferrer" aria-label="Perfil GitHub de Gigi">
+            <!-- Icono GitHub SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 0a12 12 0 00-3.79 23.4c.6.1.82-.26.82-.58v-2.18c-3.34.73-4.04-1.6-4.04-1.6a3.18 3.18 0 00-1.34-1.77c-1.1-.75.08-.74.08-.74a2.5 2.5 0 011.82 1.23 2.53 2.53 0 003.44 1 2.53 2.53 0 01.75-1.6c-2.67-.3-5.48-1.33-5.48-5.93a4.65 4.65 0 011.24-3.22 4.33 4.33 0 01.12-3.18s1-.32 3.3 1.23a11.4 11.4 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23a4.33 4.33 0 01.12 3.18 4.65 4.65 0 011.24 3.22c0 4.6-2.81 5.62-5.5 5.92a2.85 2.85 0 01.82 2.2v3.26c0 .32.21.7.82.58A12 12 0 0012 0z"/>
+            </svg>
+            GitHub
+          </a>
+        </li>
+      </ul>
+    </details>
 
-  <details class="section">
-    <summary>🛡️ Plataformas de Seguridad</summary>
-    <ul>
-      <li>1Password / Bitwarden - Gestión de contraseñas</li>
-      <li>ProtonMail - Correo seguro</li>
-      <li>Google Authenticator - Autenticación 2FA</li>
-      <li>VPN corporativa - Seguridad de red</li>
-      <li>Backups automáticos en la nube</li>
-    </ul>
-  </details>
+  </div>
 
-  <details class="section">
-    <summary>📣 Plataformas para Publicación</summary>
-    <ul>
-      <li>ArtStation / Behance - Portafolio profesional</li>
-      <li>YouTube / Vimeo - Videos y reels</li>
-      <li>Instagram - Visual y comunidad</li>
-      <li>LinkedIn - Contacto profesional</li>
-      <li>Discord - Comunicación y comunidad</li>
-    </ul>
-  </details>
+  <div class="watermark" aria-hidden="true">Project Gigi 2023</div>
 
-  <p class="autor">
-    Creado por Guido Benjamín Rebolledo Núñez<br>
-    Estudiante de Animación Digital y Videojuegos en INACAP<br>
-    Proyecto final para la asignatura "TIC Aplicadas al Diseño"
-  </p>
+  <script>
+    const translateBtn = document.getElementById('translateBtn');
+    const toggleThemeBtn = document.getElementById('toggleThemeBtn');
+    const title = document.getElementById('title');
+    const whoamiSummary = document.getElementById('whoami-summary');
+    const whoamiP1 = document.getElementById('whoami-p1');
+    const whoamiP2 = document.getElementById('whoami-p2');
+    const whoamiP3 = document.getElementById('whoami-p3');
+    const projectsSummary = document.getElementById('projects-summary');
+    const projectsP = document.getElementById('projects-p');
+    const toolsSummary = document.getElementById('tools-summary');
+    const contactSummary = document.getElementById('contact-summary');
+    const contactP = document.getElementById('contact-p');
 
-  <!-- Marca de modificación -->
-  <div class="watermark">v1.1 ✨ modificado con amor</div>
+    let isEnglish = false;
+
+    translateBtn.addEventListener('click', () => {
+      if (!isEnglish) {
+        // Cambiar a inglés
+        title.textContent = 'Gigi Portfolio';
+        whoamiSummary.textContent = '🧙 Who I am';
+        whoamiP1.textContent = 'Hi! They call me Gigi. I\'m 21 years old and a student of Digital Animation and Video Game Development at INACAP, Chile.';
+        whoamiP2.textContent = 'My passion is <span class="highlight">3D environment design</span>, especially those that convey atmospheres, emotions, and stories. I get inspired by <span class="highlight">video games</span> and <span class="highlight">anime</span> to create unique worlds.';
+        whoamiP3.textContent = 'I also enjoy programming. With my basic knowledge, I created this website from scratch, along with some smaller projects. My goal is to professionalize my art and live from what I love to create.';
+        projectsSummary.textContent = '🗂️ 3D Projects';
+        projectsP.textContent = 'Here you can see a selection of my recent works.';
+        toolsSummary.textContent = '🛠️ Tools I use';
+        contactSummary.textContent = '📡 Contact';
+        contactP.textContent = 'You can find me or write to me at:';
+        translateBtn.textContent = 'Traducir al español';
+        isEnglish = true;
+      } else {
+        // Cambiar a español
+        title.textContent = 'Portafolio de Gigi';
+        whoamiSummary.textContent = '🧙 Quién soy';
+        whoamiP1.innerHTML = '¡Hola! Me dicen <span class="highlight">Gigi</span>. Tengo 21 años y soy estudiante de Animación Digital y Desarrollo de Videojuegos en INACAP, Chile.';
+        whoamiP2.innerHTML = 'Mi pasión es el <span class="highlight">diseño de entornos 3D</span>, especialmente aquellos que transmiten atmósferas, emociones e historias. Me inspiro en los <span class="highlight">videojuegos</span> y el <span class="highlight">anime</span> para crear mundos únicos.';
+        whoamiP3.textContent = 'También disfruto de la programación. Con mis conocimientos básicos, he creado esta página desde cero, además de otros proyectos más pequeños. Mi meta es profesionalizar mi arte y vivir de lo que amo crear.';
+        projectsSummary.textContent = '🗂️ Proyectos 3D';
+        projectsP.textContent = 'Aquí puedes ver una muestra de mis trabajos más recientes.';
+        toolsSummary.textContent = '🛠️ Herramientas que uso';
+        contactSummary.textContent = '📡 Contacto';
+        contactP.textContent = 'Puedes encontrarme o escribirme en:';
+        translateBtn.textContent = 'Translate to English';
+        isEnglish = false;
+      }
+    });
+
+    // Cambio de tema claro/oscuro
+    toggleThemeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+    });
+
+    // Slider proyectos simple
+    const sliderTrack = document.getElementById('sliderTrack');
+    const slides = sliderTrack.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.slider-btn.prev');
+    const nextBtn = document.querySelector('.slider-btn.next');
+    let currentIndex = 0;
+
+    function updateSlider() {
+      sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateSlider();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateSlider();
+    });
+  </script>
+
 </body>
 </html>
+
